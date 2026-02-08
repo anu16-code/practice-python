@@ -1,1 +1,23 @@
+import csv
+ROLES = ["Doctor", "Nurse", "Receptionist"]
+SHIFTS = ["Morning", "Afternoon", "Night"]
+Attendance = ["Present", "Absent", "Leave", "Half-Day"]
+def track_attendance(name, role, shift, status):
+    if role not in ROLES:
+        return f"Invalid Role: {role}"
+    if shift not in SHIFTS:
+        return f"Invalid Shift: {shift}"
+    if status not in Attendance:
+        return f"Invalid Attendance Status: {status}"
+    return f"{name} is {status} for the {shift} shift as a {role}."
 
+#----READ CSV & PROCESS EACH LINE----
+with open("attendancedata.csv", newline="") as file:
+    reader = csv.DictReader(file)
+    for row in reader:
+        result= track_attendance(row["name"].strip(), row["role"].strip(), row["shift"].strip(), row["status"].strip())
+        print(result)
+      
+
+
+    
